@@ -1,0 +1,3 @@
+CREATE TABLE fashion(
+  name VARCHAR(50) PRIMARY KEY, category VARCHAR(10), note VARCHAR(255)
+);
