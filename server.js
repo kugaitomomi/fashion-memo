@@ -44,6 +44,7 @@ app.use(express.json());
 console.log(__dirname);
 console.log(path.join(__dirname, "client/build"));
 
+// app.use(express.static(path.join(__dirname, "client/build")));
 
 //process.env.PORT
 //process.env.NODE_ENV => production or undefined
@@ -113,6 +114,10 @@ app.delete("/delete", async(req, res) => {
     console.error(error);
     return res.status(500).send();
   }
+});
+
+app.get("*", (req, res)=>{
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 app.listen(PORT, ()=>{
