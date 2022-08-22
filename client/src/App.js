@@ -62,7 +62,7 @@ return (
   {/* JavaScriptのonsubmitとは、送信ボタンが押された時に起動するイベントです。 onClickと混同しない！ */}
     <form onSubmit={handleSubmit}>
       <input type="file" className="input" onChange={handleChange} />
-      <select name="example" value={category} onChange={selectChange}>
+      <select name="example" defaultValue={category} onChange={selectChange}>
       <option value="Daily">Daily</option>
       <option value="Special">Special</option>
       <option value="Date">Date</option>
