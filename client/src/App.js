@@ -22,7 +22,7 @@ function App() {
     formData.append("pic", pic);
     formData.append("category", category);
     formData.append("note", note);
-    await axios.post("http://localhost:5000/addPicture", formData).then(getAllInfo()).catch((error) => console.log(error));
+    await axios.post("/addPicture", formData).then(getAllInfo()).catch((error) => console.log(error));
   }
 
     const handleChange = (e) => {
@@ -31,7 +31,7 @@ function App() {
   }
 
   const getAllInfo = async () => {
-    await axios.get('http://localhost:5000/pictures').then(res => {
+    await axios.get('/pictures').then(res => {
       setAllPics(res.data);
       console.log(allPics);
     }).catch((error) => {
@@ -41,7 +41,7 @@ function App() {
 
   const handleDelete = async (name) => {
     await axios
-      .delete("http://localhost:5000/delete", {
+      .delete("/delete", {
         //bodyに値をセットする場合は、第2引数にdataというキー名でセットする。
         data: { name: name },
       })
@@ -74,7 +74,7 @@ return (
       <button className="submit" >upload</button>
     </form>
     <div className="imgsContainer">
-      {allPics && allPics.map((pic, index) => {
+      {allPics.map((pic, index) => {
         return <div className="imgItem" key={index}><img src={pic.url} alt={pic.name} width="50%" /><p>{pic.category}</p><p>{pic.note}</p><button className="imgButton" onClick={() => handleDelete(pic.name)}>Delete</button></div>
         //onClickで「関数名()」だとクリックしていなくても、関数が実行されてしまうので削除系の関数の場合は、値が削除されてしまいデータがなくなってしまう。なので、無名関数を挟むことで、「クリックされた時」というタイミングで関数実行ができるようになる。
       })}
