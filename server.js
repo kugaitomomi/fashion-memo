@@ -44,7 +44,6 @@ app.use(express.json());
 console.log(__dirname);
 console.log(path.join(__dirname, "client/build"));
 
-app.use(express.static(path.join("./client/build")));
 
 //process.env.PORT
 //process.env.NODE_ENV => production or undefined
