@@ -22,7 +22,7 @@ function App() {
     formData.append("pic", pic);
     formData.append("category", category);
     formData.append("note", note);
-    await axios.post("/addPicture", formData).then(getAllInfo()).catch((error) => console.log(error));
+    await axios.post("http://localhost:5000/addPicture", formData).then(getAllInfo()).catch((error) => console.log(error));
   }
 
     const handleChange = (e) => {
@@ -31,7 +31,7 @@ function App() {
   }
 
   const getAllInfo = async () => {
-    await axios.get('/pictures').then(res => {
+    await axios.get('http://localhost:5000/pictures').then(res => {
       setAllPics(res.data);
       console.log(allPics);
     }).catch((error) => {
@@ -41,7 +41,7 @@ function App() {
 
   const handleDelete = async (name) => {
     await axios
-      .delete("/delete", {
+      .delete("http://localhost:5000/delete", {
         //bodyに値をセットする場合は、第2引数にdataというキー名でセットする。
         data: { name: name },
       })
