@@ -85,3 +85,27 @@ app.get("/pictures", async(req, res) => {
 })
 
 
+//delete a picture
+app.delete("/delete", async(req, res) => {
+  const deletePic = req.body.name;
+  const deleteRef = ref(storage, deletePic);
+  //「deleteObject()」メソッドはfirebase側のdelete() メソッド
+  try {
+    //画像名をキーにして、削除する関数を実行している。
+     await deleteObject(deleteRef);
+     // ↓指定したカラム名の中から該当する「削除対象となる情報名」を探して削除する。
+     // knex("テーブル名").where("カラム名", 削除対象となる情報名).del();
+    //  await knex("fashion").where("name", deletePic).del();
+     //削除したら、ステータス200を返す。
+     res.status(200).send();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send();
+  }
+});
+
+
+const PORT = 5000;
+app.listen(PORT, ()=>{
+  console.log(`server has started on port ${5000}`);
+});
